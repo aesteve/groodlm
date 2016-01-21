@@ -13,6 +13,7 @@ init : Model
 init =
   Model "Anonymous" "Anonymous"
 
+main : Signal Html
 main =
   StartApp.start { model = init, view = view, update = update }
 
@@ -20,6 +21,7 @@ type Action
   = PickUpName
   | UpdateName String
 
+update : Action -> Model -> Model
 update action model =
   case action of
     PickUpName ->
@@ -27,6 +29,7 @@ update action model =
     UpdateName name ->
       { model | typing = name }
 
+view : Address Action -> Model -> Html
 view address model =
   div []
     [ h1 [] [ text ("Hello " ++ model.username)]
